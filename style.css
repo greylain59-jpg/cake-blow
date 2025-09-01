@@ -74,7 +74,7 @@ body {
 .icing {
   top: 2px;
   left: 5px;
-  background-color: #f0e4d0;
+  background-color: #A7C7E7;
   width: 240px;
   height: 90px;
   border-radius: 50%;
@@ -98,7 +98,7 @@ body {
   height: 60px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
-  background-color: #f0e4d0; 
+  background-color: #B6D0E2; 
 }
 
 .drip1 {
@@ -141,7 +141,7 @@ body {
   width: 12px;
   height: 6px;
   border-radius: 50%;
-  background-color: #36454F;
+  background-color: #ad030f;
 }
 
 .candle.out .flame {
