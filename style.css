@@ -74,7 +74,7 @@ body {
 .icing {
   top: 2px;
   left: 5px;
-  background-color: #F0FFFF;
+  background-color: #abc9de;
   width: 240px;
   height: 90px;
   border-radius: 50%;
@@ -86,8 +86,8 @@ body {
   right: 5px;
   bottom: 6px;
   left: 5px;
-  background-color: #A7C7E7;
-  box-shadow: 0 0 4px #B6D0E2, 0 0 4px #B6D0E2, 0 0 4px #B6D0E2;
+  background-color: #B6D0E2;
+  box-shadow: 0 0 4px #cce1f0, 0 0 4px #cce1f0, 0 0 4px #cce1f0;
   border-radius: 50%;
   z-index: 1;
 }
@@ -98,7 +98,7 @@ body {
   height: 60px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
-  background-color: #B6D0E2; 
+  background-color: #abc9de; 
 }
 
 .drip1 {
