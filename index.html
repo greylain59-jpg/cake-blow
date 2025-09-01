@@ -38,7 +38,7 @@
   </head>
   <body>
     <div class="candle-count-display">
-      Candles on the Cake: <span id="candleCount">0</span>
+      candles on cake: <span id="candleCount">0</span>
     </div>
     <div class="cake">
       <div class="plate"></div>
@@ -52,8 +52,8 @@
     </div>
     <!-- buttons moved to top-right -->
     <div class="ui-controls">
-      <button id="shareBtn">Share this cake</button>
-      <button id="resetLinkBtn">Reset candles</button>
+      <button id="shareBtn">share cake</button>
+      <button id="resetLinkBtn">reset candles</button>
     </div>
 
     <script src="script.js"></script>
@@ -104,7 +104,6 @@
       }
       document.getElementById('shareBtn')?.addEventListener('click', updateShareLink);
 
-      // Turn "Reset link" into "Reset candles" + full reset behavior
       document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
         // 1) remove all candle elements (and flames, if present)
         document.querySelectorAll('.candle, .flame, .spark').forEach(el => el.remove());
