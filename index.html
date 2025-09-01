@@ -50,15 +50,16 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
-    <!-- buttons moved to top-right -->
+    <!-- buttons in top-right -->
     <div class="ui-controls">
       <button id="shareBtn">Share this cake</button>
       <button id="resetLinkBtn">Reset link</button>
+      <button id="resetCandlesBtn">Reset candles</button>
     </div>
 
     <script src="script.js"></script>
     <script>
-    /* === Shareable-candles patch === */
+    /* === Shareable-candles patch with reset === */
     (function () {
       const cake = document.querySelector('.cake');
       const candlePts = [];
@@ -107,6 +108,20 @@
       document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
         history.replaceState(null, '', location.pathname);
         alert('Share link reset.');
+      });
+
+      // --- NEW Reset Candles button ---
+      document.getElementById('resetCandlesBtn')?.addEventListener('click', () => {
+        // remove all candle elements
+        document.querySelectorAll('.candle').forEach(el => el.remove());
+        // reset counter
+        const counter = document.getElementById('candleCount');
+        if (counter) counter.textContent = "0";
+        // clear saved points
+        candlePts.length = 0;
+        // clear hash in URL
+        history.replaceState(null, '', location.pathname);
+        alert('All candles reset.');
       });
 
       function spawnAt(x, y) {
