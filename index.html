@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <title>Candle Blow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
     <link rel="stylesheet" href="./style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
+      /* layout you asked for */
       body {
         margin: 0;
         min-height: 100vh;
@@ -31,50 +29,75 @@
         background: rgba(255,255,255,0.85);
         cursor: pointer;
       }
-      .ui-controls button:hover {
-        background: #fff;
+      .ui-controls button:hover { background: #fff; }
+
+      /* ======================= COLOR PALETTE OVERRIDES ======================= */
+      /* Candles */
+      .candle{ background:#28282B !important; }
+      .candle::before{ background:#36454F !important; } /* candle top */
+
+      /* --- Top frosting + any bevels the theme used --- */
+      .icing{
+        background:#B6D0E2 !important;
+        border-color:#B6D0E2 !important;
+        box-shadow:none !important;
+        background-image:none !important;
       }
-
-      /* === CUSTOM COLORS === */
-
-      /* Candle body */
-      .candle {
-        background-color: #28282B !important;
-      }
-
-      /* Candle top */
-      .candle::before {
-        background-color: #36454F !important;
-      }
-
-      /* Frosting / icing */
-      .icing {
-        background: #B6D0E2 !important;
+      .icing::before,
+      .icing::after{
+        background:#B6D0E2 !important;
+        border-color:#B6D0E2 !important;
+        box-shadow:none !important;
+        background-image:none !important;
       }
 
       /* Drips match frosting */
-      .drip {
-        background: #B6D0E2 !important;
+      .drip{
+        background:#B6D0E2 !important;
+        border-color:#B6D0E2 !important;
+        box-shadow:none !important;
+        background-image:none !important;
       }
 
-      /* Cake layers with gradients */
-      .layer-bottom {
-        background: linear-gradient(to top, #191970, #303080) !important;
-      }
-      .layer-middle {
-        background: linear-gradient(to top, #6082B6, #7a9cc8) !important;
-      }
-      .layer-top {
-        background: linear-gradient(to top, #4682B4, #5a9bcf) !important;
+      /* --- Cake layers (base body color) --- */
+      .layer{
+        background:#191970 !important;       /* replace original brown */
+        border-color:#191970 !important;
+        background-image:none !important;     /* neutralize theme gradients */
+        box-shadow:none !important;           /* neutralize theme shadows */
       }
 
-      /* Plate unchanged */
+      /* --- Thin rings/stripes on layers ---
+         Many forks draw stripes with ::before and ::after (or borders).
+         Set both so whichever the theme uses will pick up your palette. */
+      .layer::before{
+        background:#6082B6 !important;
+        border-color:#6082B6 !important;
+        box-shadow:none !important;
+        background-image:none !important;
+      }
+      .layer::after{
+        background:#4682B4 !important;
+        border-color:#4682B4 !important;
+        box-shadow:none !important;
+        background-image:none !important;
+      }
+
+      /* If your theme used border-top/border-bottom for stripes, this helps too */
+      .layer-bottom,
+      .layer-middle,
+      .layer-top{
+        border-top-color:#6082B6 !important;
+        border-bottom-color:#4682B4 !important;
+      }
+      /* ====================================================================== */
     </style>
   </head>
   <body>
     <div class="candle-count-display">
       candles on cake: <span id="candleCount">0</span>
     </div>
+
     <div class="cake">
       <div class="plate"></div>
       <div class="layer layer-bottom"></div>
@@ -85,6 +108,7 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
+
     <!-- buttons moved to top-right -->
     <div class="ui-controls">
       <button id="shareBtn">share cake</button>
@@ -140,17 +164,14 @@
       document.getElementById('shareBtn')?.addEventListener('click', updateShareLink);
 
       document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
-        // 1) remove all candle elements (and flames, if present)
+        // remove all candle elements (and flames, if present)
         document.querySelectorAll('.candle, .flame, .spark').forEach(el => el.remove());
-
-        // 2) reset on-screen counter
+        // reset counter
         const counter = document.getElementById('candleCount');
         if (counter) counter.textContent = '0';
-
-        // 3) clear recorded positions for sharing
+        // clear recorded positions
         candlePts.length = 0;
-
-        // 4) clear the URL hash so link starts clean
+        // clear the URL hash so link starts clean
         history.replaceState(null, '', location.pathname);
       });
 
