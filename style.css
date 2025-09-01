@@ -87,7 +87,7 @@ body {
   bottom: 6px;
   left: 5px;
   background-color: #B6D0E2;
-  box-shadow: 0 0 4px #F0FFFF, 0 0 4px #F0FFFF, 0 0 4px #F0FFFF;
+  box-shadow: 0 0 4px #B6D0E2, 0 0 4px #B6D0E2, 0 0 4px #B6D0E2;
   border-radius: 50%;
   z-index: 1;
 }
