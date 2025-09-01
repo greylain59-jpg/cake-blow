@@ -17,20 +17,22 @@ The cake design was adapted from Fazlur Rahman's creation on CodePen ([View Orig
 ## Features
 
 - **Interactive Cake**: Click to add candles 🕯️.
+- **Sharing Over the Web**: Share your cake creation with friends and loved ones 🎁.
 - **Microphone Integration**: Blow into your mic to extinguish candles 🎤.
 - **Candle Count**: Watch the candle count change dynamically 🔢.
 - **Engaging UI**: Engage with a user-friendly interface.
 
 ## Accessing the Project
 
-To experience the Interactive Birthday Cake, visit the GitHub Pages link: [Interactive Birthday Cake](https://sherryuser.github.io/cake-blow/)
+To experience the Interactive Birthday Cake, visit the GitHub Pages link: [Interactive Birthday Cake](https://mahnoorsheikh16.github.io/cake-blow/)
 
 ## How to Use
 
 1. Go to the provided GitHub Pages link.
 2. Allow microphone access.
 3. Click on the cake to add candles.
-4. Blow into your device to blow out the candles.
+4. Use the 'share cake' button to copy a link and send it to friends.
+5. Blow into your device to blow out the candles.
 
 ## Technologies
 
