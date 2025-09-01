@@ -4,7 +4,7 @@
 
 ## Overview
 
-This Interactive Birthday Cake 🍰 project is a delightful web-based application hosted on GitHub Pages. Users can interactively add candles 🕯️ to a birthday cake and blow them out using their microphone, combining HTML, CSS, and JavaScript for a charming user experience.
+This Interactive Birthday Cake 🍰 project is a delightful web-based application hosted on GitHub Pages. Users can interactively add candles 🕯️ to a birthday cake and blow them out using their microphone, combining HTML, CSS, and JavaScript for a charming user experience. **Built on Sherryuser's Cake-Blow application, this version adds the ability to share your cake creations with friends and loved ones, making it perfect for celebrating long-distance birthdays and more.**
 
 ## Motivation
 
