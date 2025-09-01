@@ -25,6 +25,98 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
+    <div style="margin:12px 0;">
+      <button id="shareBtn">Share this cake</button>
+      <button id="resetLinkBtn" style="margin-left:8px;">Reset link</button>
+    </div>
     <script src="script.js"></script>
+    <script>
+    /* === Shareable-candles patch ===
+     * Encodes candle positions in URL hash and restores them on load.
+     * Uses the .cake element as the clickable area.
+     */
+    (function () {
+      const cake = document.querySelector('.cake');   // clickable area
+      const candlePts = [];                            // stores [x,y] in pixels
+      let restoring = false;
+    
+      // ----- helpers: encode/decode to URL hash as percentages -----
+      function encode(pts, box) {
+        const rect = box.getBoundingClientRect();
+        return '#c=' + pts.map(([x, y]) => {
+          const xp = Math.max(0, Math.min(1, x / rect.width));
+          const yp = Math.max(0, Math.min(1, y / rect.height));
+          return xp.toFixed(4) + '_' + yp.toFixed(4);
+        }).join('-');
+      }
+      function decode(hash, box) {
+        const m = hash.match(/#c=([0-9._\-]+)/);
+        if (!m) return [];
+        const rect = box.getBoundingClientRect();
+        return m[1].split('-').map(p => {
+          const [xp, yp] = p.split('_').map(Number);
+          return [xp * rect.width, yp * rect.height];
+        });
+      }
+    
+      // ----- record user placements (don’t record while restoring) -----
+      function recordClick(e) {
+        if (restoring || !cake) return;
+        const rect = cake.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        // Only count clicks that land inside the cake box
+        if (x >= 0 && y >= 0 && x <= rect.width && y <= rect.height) {
+          candlePts.push([x, y]);
+        }
+      }
+      cake?.addEventListener('click', recordClick, true);
+    
+      // ----- share: write positions to URL & (try to) copy -----
+      function updateShareLink() {
+        if (!cake) return;
+        const urlWithHash = location.pathname + encode(candlePts, cake);
+        history.replaceState(null, '', urlWithHash);
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(location.href).catch(() => {});
+        }
+        alert('Share link ready! (Copied to clipboard if allowed)');
+      }
+      document.getElementById('shareBtn')?.addEventListener('click', updateShareLink);
+    
+      // optional: clear the hash
+      document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
+        history.replaceState(null, '', location.pathname);
+        alert('Share link reset.');
+      });
+    
+      // ----- restore on load: call your app’s candle spawner or simulate clicks -----
+      function spawnAt(x, y) {
+        // If your script.js exposes something like addCandleAt(x,y), call it:
+        if (typeof window.addCandleAt === 'function') return window.addCandleAt(x, y);
+    
+        // Fallback: simulate a click at that coordinate so your existing logic runs
+        const rect = cake.getBoundingClientRect();
+        const evt = new MouseEvent('click', {
+          clientX: rect.left + x,
+          clientY: rect.top + y,
+          bubbles: true
+        });
+        cake.dispatchEvent(evt);
+      }
+    
+      window.addEventListener('load', () => {
+        if (!cake) return;
+        const pts = decode(location.hash, cake);
+        if (!pts.length) return;
+        restoring = true;
+        // Wait a frame so script.js finishes attaching listeners
+        requestAnimationFrame(() => {
+          pts.forEach(([x, y]) => spawnAt(x, y));
+          restoring = false;
+        });
+      });
+    })();
+    </script>
   </body>
 </html>
