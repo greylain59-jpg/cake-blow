@@ -74,7 +74,7 @@ body {
 .icing {
   top: 2px;
   left: 5px;
-  background-color: #A7C7E7;
+  background-color: #F0FFFF;
   width: 240px;
   height: 90px;
   border-radius: 50%;
@@ -86,7 +86,7 @@ body {
   right: 5px;
   bottom: 6px;
   left: 5px;
-  background-color: #F0FFFF;
+  background-color: #A7C7E7;
   box-shadow: 0 0 4px #B6D0E2, 0 0 4px #B6D0E2, 0 0 4px #B6D0E2;
   border-radius: 50%;
   z-index: 1;
