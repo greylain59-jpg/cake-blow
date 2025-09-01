@@ -8,20 +8,20 @@ body {
   margin-bottom: 20px;
   font-family: 'Arial', sans-serif;
   font-size: 20px;
-  color: #6A4B18;
-  background-color: #F0E4D0;
+  color: #383878;
+  background-color: #fff7f1;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  border: 2px solid #553C13;
+  border: 2px solid #272761;
 }
 
 .candle-count-display span {
   font-weight: bold;
-  color: #AD030F;
+  color: orange;
 }
 
 .cake {
