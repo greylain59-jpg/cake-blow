@@ -86,8 +86,8 @@ body {
   right: 5px;
   bottom: 6px;
   left: 5px;
-  background-color: #f4ebdc;
-  box-shadow: 0 0 4px #f6efe3, 0 0 4px #f6efe3, 0 0 4px #f6efe3;
+  background-color: #ADD8E6;
+  box-shadow: 0 0 4px #F0FFFF, 0 0 4px #F0FFFF, 0 0 4px #F0FFFF;
   border-radius: 50%;
   z-index: 1;
 }
