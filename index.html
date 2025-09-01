@@ -50,16 +50,15 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
-    <!-- buttons in top-right -->
+    <!-- buttons moved to top-right -->
     <div class="ui-controls">
       <button id="shareBtn">Share this cake</button>
-      <button id="resetLinkBtn">Reset link</button>
-      <button id="resetCandlesBtn">Reset candles</button>
+      <button id="resetLinkBtn">Reset candles</button>
     </div>
 
     <script src="script.js"></script>
     <script>
-    /* === Shareable-candles patch with reset === */
+    /* === Shareable-candles patch === */
     (function () {
       const cake = document.querySelector('.cake');
       const candlePts = [];
@@ -105,23 +104,20 @@
       }
       document.getElementById('shareBtn')?.addEventListener('click', updateShareLink);
 
+      // Turn "Reset link" into "Reset candles" + full reset behavior
       document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
-        history.replaceState(null, '', location.pathname);
-        alert('Share link reset.');
-      });
+        // 1) remove all candle elements (and flames, if present)
+        document.querySelectorAll('.candle, .flame, .spark').forEach(el => el.remove());
 
-      // --- NEW Reset Candles button ---
-      document.getElementById('resetCandlesBtn')?.addEventListener('click', () => {
-        // remove all candle elements
-        document.querySelectorAll('.candle').forEach(el => el.remove());
-        // reset counter
+        // 2) reset on-screen counter
         const counter = document.getElementById('candleCount');
-        if (counter) counter.textContent = "0";
-        // clear saved points
+        if (counter) counter.textContent = '0';
+
+        // 3) clear recorded positions for sharing
         candlePts.length = 0;
-        // clear hash in URL
+
+        // 4) clear the URL hash so link starts clean
         history.replaceState(null, '', location.pathname);
-        alert('All candles reset.');
       });
 
       function spawnAt(x, y) {
