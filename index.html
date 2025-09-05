@@ -14,7 +14,7 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background-color: #e6dbd3; /* soft pastel background */
+        background-color: #e6dbd3;
       }
       .ui-controls {
         position: fixed;
@@ -51,7 +51,6 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
-    <!-- buttons moved to top-right -->
     <div class="ui-controls">
       <button id="shareBtn">share cake</button>
       <button id="resetLinkBtn">reset candles</button>
@@ -59,13 +58,11 @@
 
     <script src="script.js"></script>
     <script>
-    /* === Shareable-candles patch === */
     (function () {
       const cake = document.querySelector('.cake');
-      const candlePts = [];   // stores [x,y] (percent-encoded into URL)
+      const candlePts = [];
       let restoring = false;
 
-      // ----- helpers: encode/decode to URL hash as percentages -----
       function encode(pts, box) {
         const rect = box.getBoundingClientRect();
         return '#c=' + pts.map(([x, y]) => {
@@ -84,7 +81,6 @@
         });
       }
 
-      // ----- record user placements (don’t record while restoring) -----
       function recordClick(e) {
         if (restoring || !cake) return;
         const rect = cake.getBoundingClientRect();
@@ -96,7 +92,6 @@
       }
       cake?.addEventListener('click', recordClick, true);
 
-      // ----- share: write positions to URL & (try to) copy -----
       function updateShareLink() {
         if (!cake) return;
         const urlWithHash = location.pathname + encode(candlePts, cake);
@@ -108,23 +103,18 @@
       }
       document.getElementById('shareBtn')?.addEventListener('click', updateShareLink);
 
-      // ----- reset: use script.js helper so array + counter reset correctly -----
       document.getElementById('resetLinkBtn')?.addEventListener('click', () => {
         if (typeof window.resetCandles === 'function') {
-          window.resetCandles();        // removes DOM candles, clears internal array, updates count to 0
+          window.resetCandles();        
         } else {
-          // fallback if script.js didn't load for some reason
           document.querySelectorAll('.candle, .flame, .spark').forEach(el => el.remove());
           const counter = document.getElementById('candleCount');
           if (counter) counter.textContent = '0';
         }
-        // clear recorded positions for sharing
         candlePts.length = 0;
-        // clear the URL hash so link starts clean
         history.replaceState(null, '', location.pathname);
       });
 
-      // ----- restore on load: call your app’s candle spawner or simulate clicks -----
       function spawnAt(x, y) {
         if (typeof window.addCandleAt === 'function') return window.addCandleAt(x, y);
         const rect = cake.getBoundingClientRect();
