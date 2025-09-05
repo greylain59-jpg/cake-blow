@@ -84,14 +84,12 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("getUserMedia not supported on your browser!");
   }
 
-  /* === expose helpers for index.html === */
-  window.addCandleAt = addCandle;              // used by your share/restore patch
-  window.updateCandleCount = updateCandleCount; // optional external use
+  window.addCandleAt = addCandle;              
+  window.updateCandleCount = updateCandleCount; 
 
-  // Hard reset: remove all candles, clear array, update UI
   window.resetCandles = function () {
     candles.forEach((c) => c.remove());
     candles = [];
-    updateCandleCount(); // sets counter to 0
+    updateCandleCount();
   };
 });
