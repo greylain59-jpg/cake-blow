@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Tonie!</title>
+<style>
+  body {
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  .cake-container {
+    position: relative;
+    width: 300px;
+    height: 250px;
+  }
+  .cake-tier {
+    width: 100%;
+    height: 120px;
+    background-color: black;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    border: 4px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .tier-top {
+    width: 200px;
+    height: 80px;
+    background-color: black;
+    border-radius: 15px;
+    position: absolute;
+    top: -80px;
+    left: 50px;
+    border: 3px solid #555;
+  }
+  .ribbons {
+    position: absolute;
+    width: 20px;
+    height: 120px;
+    background-color: pink;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+  }
+  .cake-text {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .candles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: -50px;
+  }
+  .candle {
+    width: 10px;
+    height: 30px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+  }
+  .candle.babyBlue { background-color: #89CFF0; }
+  .candle.black { background-color: #000; border: 1px solid #555; }
+  .candle.pink { background-color: #FF69B4; }
+
+  .flame {
+    width: 6px;
+    height: 10px;
+    background-color: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: 2px;
+    display: none;
+    animation: flicker 0.3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-2px); opacity: 0.7; }
+  }
+</style>
+</head>
+<body>
+  <div class="cake-container">
+    <div class="cake-tier">
+      <div class="cake-text">Happy Birthday, Tonie!</div>
+      <div class="ribbons"></div>
+      <div class="candles" id="candles"></div>
+    </div>
+    <div class="tier-top"></div>
+  </div>
+
+<script>
+  const candleColors = ["babyBlue", "black", "pink"];
+  const candleCount = 17;
+  const candlesContainer = document.getElementById("candles");
+
+  for (let i = 0; i < candleCount; i++) {
+    const candle = document.createElement("div");
+    candle.classList.add("candle");
+    candle.classList.add(candleColors[i % candleColors.length]);
+
+    const flame = document.createElement("div");
+    flame.classList.add("flame");
+    candle.appendChild(flame);
+
+    candle.addEventListener("click", () => {
+      flame.style.display = flame.style.display === "block" ? "none" : "block";
+    });
+
+    candlesContainer.appendChild(candle);
+  }
+</script>
+</body>
+</html>
